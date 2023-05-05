@@ -498,7 +498,7 @@ export default function Customize() {
             {didHeadChange() && dragonflyWonka < 1 && <p>1 Dragonfly wonka <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/5" target="_blank">purchase ↗</a></p>}
             {didOutfitChange() && dragonflyYellow < 1 && <p>1 Dragonfly yellow <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/6" target="_blank">purchase ↗</a></p>}
             {(didNameChange() || didDescChange()) && waterLily < 1 && <p>1 Water lily<a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/1" target="_blank">purchase ↗</a></p> }
-            {hasMissingDragonflies() && <a className="cursor-pointer underline underline-offset-2" onClick={() => loadFlytrap(account)}>&#8634; Check my balance again</a>}
+            {hasMissingDragonflies() && <a className="cursor-pointer underline underline-offset-2" onClick={() => loadFlytrap(account)}>&#x21bb; Check my balance again</a>}
             {hasChanges() && !hasMissingDragonflies() &&
               <>
                 <div>

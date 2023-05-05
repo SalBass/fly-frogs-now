@@ -16,7 +16,7 @@ export default function AttributeSelect(props) {
       <select name={props.name} value={props.value} onChange={props.onChange} className="w-full">
         <option value={props.starting}>{props.starting}</option>
         {props.options.map((o) =>
-          o !== props.starting && <option value={o}>{o}</option>
+          o !== props.starting && <option key={o} value={o}>{o}</option>
         )}
       </select>
     </label>
