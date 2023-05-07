@@ -37,6 +37,9 @@ export default function Home() {
           <div>
             <h2 className="text-xl">Fly Frogs</h2>
             <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frogs">View collection &rarr;</a>
+            <div className="mt-4">
+              <Button href="https://fly-frogs-next.vercel.app">Breed tadpoles</Button>
+            </div>
           </div>
         </div>
         <div className="bg-[#FFBC0A] pl-1 pr-4 pt-4 pb-0 border-t-2 border-black flex gap-1">
@@ -67,8 +70,8 @@ export default function Home() {
       <div className="grid grid-cols-2 md:grid-cols-4">
         <div className="col-span-2 border-t-2 md:border-r-2 border-black p-2">
           <a href="https://shop.flyfrogs.xyz" target="blank" className="flex items-center gap-1">
-            <img src="/hat.png" class="w-32 md:w-16" />
-            <img src="/backpack.png" class="w-32 md:w-16" />
+            <img src="/hat.png" className="w-32 md:w-16" />
+            <img src="/backpack.png" className="w-32 md:w-16" />
             <h2 className="text-7xl md:text-4xl font-bold font-display">Merch Store</h2>
           </a>
         </div>
