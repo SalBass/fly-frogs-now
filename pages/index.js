@@ -36,7 +36,7 @@ export default function Home() {
           <img className="self-end" src="/frog.png" width="160" />
           <div>
             <h2 className="text-xl">Fly Frogs</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frogs">View collection &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://opensea.io/collection/fly-frogs">View collection &rarr;</a>
             <div className="mt-4">
               <Button href="https://fly-frogs-next.vercel.app">Breed tadpoles</Button>
             </div>
@@ -46,7 +46,7 @@ export default function Home() {
           <img className="self-center" src="/tadpole.png" width="160" />
           <div>
             <h2 className="text-xl">Tadpoles</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frogs-tadpoles">View collection &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://opensea.io/collection/fly-frogs-tadpoles">View collection &rarr;</a>
             <div className="mt-4">
               <Button href="/customize">Customize</Button>
             </div>
@@ -56,14 +56,14 @@ export default function Home() {
           <img className="self-center" src="/flytrap.png" width="160" height="160" />
           <div>
             <h2 className="text-xl">Flytrap</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frogs-flytrap">View collection &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://opensea.io/collection/fly-frogs-flytrap">View collection &rarr;</a>
           </div>
         </div>
         <div className="bg-[#1F56B5] pl-3 pr-4 pt-4 pb-0 border-t-2 border-black flex gap-1">
           <img className="self-end" src="/doodle.png" width="160" height="160" />
           <div className="text-white">
             <h2 className="text-xl">Doodle Pond</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frogs-doodle-pond">View collection &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://opensea.io/collection/fly-frogs-doodle-pond">View collection &rarr;</a>
           </div>
         </div>
       </div>
@@ -93,30 +93,30 @@ export default function Home() {
           <h2 className="text-lg font-semibold uppercase">In the Media</h2>
           <ul className="space-y-2 mt-2 pl-4 list-outside list-disc">
             <li>
-              <a href="https://savethefrogs.com/fly-frogs/" className="hover:underline" target="blank">
+              <a href="https://savethefrogs.com/fly-frogs/" className="hover:underline underline-offset-4" target="blank">
                 <h3 className="text-base">Fly Frogs Donates $32,468 To SAVE THE FROGS!</h3>
               </a>
             </li>
             <li>
-              <a href="https://artcolumn.substack.com/p/fly-frogs-making-the-internet-fun" className="hover:underline" target="blank">
+              <a href="https://artcolumn.substack.com/p/fly-frogs-making-the-internet-fun" className="hover:underline underline-offset-4" target="blank">
                 <h3 className="text-base">Fly Frogs - Making The Internet Fun Again</h3>
                 <span className="text-slate-500">Art Column by Studio TBD</span>
               </a>
             </li>
             <li>
-              <a href="https://podcasters.spotify.com/pod/show/ma-fer5/episodes/Ribbit--An-interview-from-the-pond-with-FlyFrogs-creators-Josh--Molly-e1b3hg6/a-a70q0u9" className="hover:underline" target="blank">
+              <a href="https://podcasters.spotify.com/pod/show/ma-fer5/episodes/Ribbit--An-interview-from-the-pond-with-FlyFrogs-creators-Josh--Molly-e1b3hg6/a-a70q0u9" className="hover:underline underline-offset-4" target="blank">
                 <h3 className="text-base">Ribbit. An interview from the pond with Fly Frogs creators Josh & Molly</h3>
                 <span className="text-slate-500">The Matthew and Rizzle Show</span>
               </a>
             </li>
             <li>
-              <a href="https://artcolumn.substack.com/p/nft-spotlight-fly-frogs" className="hover:underline" target="blank">
+              <a href="https://artcolumn.substack.com/p/nft-spotlight-fly-frogs" className="hover:underline underline-offset-4" target="blank">
                 <h3 className="text-base">NFT Spotlight: Fly Frogs</h3>
                 <span className="text-slate-500">Art Column by Studio TBD</span>
               </a>
             </li>
             <li>
-              <a href="https://www.youtube.com/@flyfrogs2384/videos" className="hover:underline" target="blank">
+              <a href="https://www.youtube.com/@flyfrogs2384/videos" className="hover:underline underline-offset-4" target="blank">
                 <h3 className="text-base">Fly Frogs YouTube Channel</h3>
               </a>
             </li>
@@ -126,28 +126,28 @@ export default function Home() {
           <img src="/physical.jpg" className="w-48 h-48 md:w-32 md:h-32 lg:w-52 lg:h-52" />
           <div className="py-3">
             <h2 className="text-xl">Physicals</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frog-physicals">View collection &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://opensea.io/collection/fly-frog-physicals">View collection &rarr;</a>
           </div>
         </div>
         <div className="border-t-2 border-black flex gap-4">
           <img src="/fun.jpg" className="w-48 h-48 md:w-32 md:h-32 lg:w-52 lg:h-52" />
           <div className="py-3">
             <h2 className="text-xl">Fun Factory</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frog-fun-factory">View collection &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://opensea.io/collection/fly-frog-fun-factory">View collection &rarr;</a>
           </div>
         </div>
         <div className="border-t-2 md:border-r-2 border-black flex gap-4">
           <img src="/parcel.gif" className="w-48 h-48 md:w-32 md:h-32 lg:w-52 lg:h-52" />
           <div className="py-3">
             <h2 className="text-xl">Voxel Lily Pad</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://www.voxels.com/play?coords=E@1590E,1206N">Hop in world &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://www.voxels.com/play?coords=E@1590E,1206N">Hop in world &rarr;</a>
           </div>
         </div>
         <div className="border-t-2 border-black flex gap-4">
           <img src="/ribbit.gif" className="w-48 h-48 md:w-32 md:h-32 lg:w-52 lg:h-52" />
           <div className="py-3">
             <h2 className="text-xl">Voxels</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://opensea.io/collection/fly-frog-voxels">View collection &rarr;</a>
+            <a className="underline underline-offset-2 hover:underline-offset-4" target="blank" href="https://opensea.io/collection/fly-frog-voxels">View collection &rarr;</a>
           </div>
         </div>
         <div className="col-span-2 border-t-2 border-black p-3 bg-[#dddddd]">

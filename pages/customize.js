@@ -13,6 +13,7 @@ import {
 import FlyTrap from '../abi/FlyTrap.json';
 import AttributeSelect from '../components/AttributeSelect';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import TadpoleModal from '../components/TadpoleModal';
 import { backgrounds, heads, skins, eyes, mouths, outfits } from '../util/customizableTraits';
@@ -46,6 +47,7 @@ export default function Customize() {
   const [dragonflyYellow, setDragonflyYellow] = useState("--");
   const [waterLily, setWaterLily] = useState("--");
   const [tadpoles, setTadpoles] = useState([]);
+  const [tadpolePageKey, setTadpolePageKey] = useState();
   const [stagedTadpole, setStagedTadpole] = useState();
   const [stagedBackground, setStagedBackground] = useState();
   const [stagedHead, setStagedHead] = useState();
@@ -57,6 +59,7 @@ export default function Customize() {
   const [stagedDesc, setStagedDesc] = useState();
   const [alertMsg, setAlertMsg] = useState();
   const [provider, setProvider] = useState();
+  const [customizing, setCustomizing] = useState();
   const [success, setSuccess] = useState(false);
   
   async function loadFlytrap(address) {
@@ -100,10 +103,16 @@ export default function Customize() {
       network: Network.ETH_MAINNET,
     };
     const alchemy = new Alchemy(settings);
-    
+  
     const nftsForOwner = await alchemy.nft.getNftsForOwner(
-      address, {contractAddresses: [tadpolesAddress]}
+      address, {contractAddresses: [tadpolesAddress], pageKey: tadpolePageKey}
     );
+
+    if(nftsForOwner.pageKey) {
+      setTadpolePageKey(nftsForOwner.pageKey);
+    } else {
+      setTadpolePageKey(null);
+    }
     
     if (nftsForOwner.totalCount > 0) {
       const nftList = nftsForOwner.ownedNfts.map((i) => {
@@ -127,7 +136,7 @@ export default function Customize() {
         })
       ));
       
-      setTadpoles(items);
+      setTadpoles(tadpoles.concat(items));
     } else {
       setTadpoles(null);
     }
@@ -282,6 +291,7 @@ export default function Customize() {
   }
   
   async function handleCustomize() {
+    setCustomizing(true);
     const dragonflyTokenIds = getDragonflyTokenIds();
     const attributes = getAttributes();
     
@@ -292,6 +302,7 @@ export default function Customize() {
         sig = await getSignature();
       } catch (e) {
         setAlertMsg(`Error: ${e.message}`);
+        setCustomizing(false);
       }
     
       if (sig) {
@@ -313,9 +324,11 @@ export default function Customize() {
             }),
           });
           setAlertMsg(null);
+          setCustomizing(false);
           setSuccess(true);
         } catch (e) {
           setAlertMsg(`Error: ${e.message}`);
+          setCustomizing(false);
         }
       }
     }
@@ -334,33 +347,34 @@ export default function Customize() {
               <Button onClick={getAccount}>Connect wallet</Button>
             </div>
             <div className="mt-6">
-              Use dragonflies and water lillies to customize your tadpole&rsquo;s traits. No gas!
+              Use <a className="underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/collection/fly-frogs-flytrap" target="blank">dragonflies and water lilies</a> to customize your tadpole&rsquo;s traits. No gas!
               <ul className="mt-4 space-y-2">
                 <li>
-                  <img src="/dragonflyYellow.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly yellow" /> Customize outfit
+                  <a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/6" target="_blank"><img src="/dragonflyYellow.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly yellow" /></a> Customize outfit
                 </li>
                 <li>
-                  <img src="/dragonflyWonka.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly wonka" /> Customize head
+                  <a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/5" target="_blank"><img src="/dragonflyWonka.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly wonka" /></a> Customize head
                 </li>
                 <li>
-                  <img src="/dragonflyTurquoise.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly turquoise" /> Customize mouth
+                  <a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/4" target="_blank"><img src="/dragonflyTurquoise.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly turquoise" /></a> Customize mouth
                 </li>
                 <li>
-                  <img src="/dragonflyLime.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly lime" />  Customize eyes
+                  <a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/3" target="_blank"><img src="/dragonflyLime.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly lime" /></a>  Customize eyes
                 </li>
                 <li>
-                  <img src="/dragonflyGum.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly gum" /> Customize skin
+                  <a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/2" target="_blank"><img src="/dragonflyGum.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly gum" /></a> Customize skin
                 </li>
                 <li>
-                  <img src="/dragonflyApple.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly apple" /> Customize background
+                  <a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/11" target="_blank"><img src="/dragonflyApple.png" className="w-14 h-14 inline-block rounded" alt="Dragonfly apple" /></a> Customize background
                 </li>
                 <li>
-                  <img src="/waterLily.png" className="w-14 h-14 inline-block rounded" alt="Water lily" /> Customize name and description
+                  <a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/1" target="_blank"><img src="/waterLily.png" className="w-14 h-14 inline-block rounded" alt="Water lily" /></a> Customize name and description
                 </li>
               </ul>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -370,10 +384,11 @@ export default function Customize() {
       <div className="border-2 border-black">
         <Header />
         {tadpoles ?
-          <TadpoleModal tadpoles={tadpoles} stagedTadpole={stagedTadpole} onClick={switchStaged} type="button" />
+          <TadpoleModal tadpoles={tadpoles} stagedTadpole={stagedTadpole} onClick={switchStaged} loadMoreTadpoles={loadTadpoles} pageKey={tadpolePageKey} account={account} type="button" />
           : <p className="p-8 text-center border-t-2 border-black">
-            You need at least one tadpole to customize. Hop on over and <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/collection/fly-frogs-tadpoles" target="_blank">buy a tad</a>!</p>
+            You need at least one tadpole to customize. Hop on over and <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/collection/fly-frogs-tadpoles" target="_blank">buy a tad</a>!</p>
         }
+        <Footer />
       </div>
     );
   }
@@ -424,12 +439,13 @@ export default function Customize() {
           <div className="col-span-2 p-8 text-center border-t-2 border-black">
             <h2 className="text-2xl">Congrats!</h2>
             <p className="text-lg">{stagedName}</p>
-            <a className="cursor-point underline underline-offset-2" target="_blank" href={`https://opensea.io/assets/ethereum/0x9d3031d181ec6a2a784ba152f993332442fe8bfc/${stagedTadpole.tokenId}`}>Don&rsquo;t forget to refresh the metadata ↗</a>
+            <a className="cursor-point underline underline-offset-2 hover:underline-offset-4" target="_blank" href={`https://opensea.io/assets/ethereum/0x9d3031d181ec6a2a784ba152f993332442fe8bfc/${stagedTadpole.tokenId}`}>Don&rsquo;t forget to refresh the metadata ↗</a>
             <div className="mt-8">
               <Button href="/customize">&#x21bb; Start again</Button>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -451,33 +467,33 @@ export default function Customize() {
             height="600"
             className="stage"
           />
-          <TadpoleModal tadpoles={tadpoles} stagedTadpole={stagedTadpole} onClick={switchStaged} type="link" />
+          <TadpoleModal tadpoles={tadpoles} stagedTadpole={stagedTadpole} onClick={switchStaged} loadMoreTadpoles={loadTadpoles} pageKey={tadpolePageKey} account={account} type="link" />
         </div>
         <div className="md:col-span-2 flex flex-wrap p-3">
-          <div className="p-3 basis-full">Use dragonflies and water lillies to customize your tadpole&rsquo;s traits. No gas!</div>
+          <div className="p-3 basis-full">Use <a className="underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/collection/fly-frogs-flytrap" target="blank">dragonflies and water lilies</a> to customize your tadpole&rsquo;s traits. No gas!</div>
           <div className="p-3 basis-1/2 md:basis-1/3">
-            <AttributeSelect name="Background" dragonflyName="Apple" dragonflyBal={dragonflyApple} value={stagedBackground} starting={stagedTadpole.attributes[0].value} onChange={(e) => setStagedBackground(e.target.value)} options={backgrounds} />
+            <AttributeSelect name="Background" dragonflyName="Apple" dragonflyBal={dragonflyApple} value={stagedBackground} starting={stagedTadpole.attributes[0].value} onChange={(e) => setStagedBackground(e.target.value)} options={backgrounds} url="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/11" />
           </div>
           <div className="p-3 basis-1/2 md:basis-1/3">
-            <AttributeSelect name="Skin" dragonflyName="Gum" dragonflyBal={dragonflyGum} value={stagedSkin} starting={stagedTadpole.attributes[2].value} onChange={(e) => setStagedSkin(e.target.value)} options={skins} />
+            <AttributeSelect name="Skin" dragonflyName="Gum" dragonflyBal={dragonflyGum} value={stagedSkin} starting={stagedTadpole.attributes[2].value} onChange={(e) => setStagedSkin(e.target.value)} options={skins} url="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/2" />
           </div>
           <div className="p-3 basis-1/2 md:basis-1/3">
-            <AttributeSelect name="Eyes" dragonflyName="Lime" dragonflyBal={dragonflyLime} value={stagedEyes} starting={stagedTadpole.attributes[3].value} onChange={(e) => setStagedEyes(e.target.value)} options={eyes} />
+            <AttributeSelect name="Eyes" dragonflyName="Lime" dragonflyBal={dragonflyLime} value={stagedEyes} starting={stagedTadpole.attributes[3].value} onChange={(e) => setStagedEyes(e.target.value)} options={eyes} url="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/3" />
           </div>
           <div className="p-3 basis-1/2 md:basis-1/3">
-            <AttributeSelect name="Mouth" dragonflyName="Turquoise" dragonflyBal={dragonflyTurquoise} value={stagedMouth} starting={stagedTadpole.attributes[4].value} onChange={(e) => setStagedMouth(e.target.value)} options={mouths} />
+            <AttributeSelect name="Mouth" dragonflyName="Turquoise" dragonflyBal={dragonflyTurquoise} value={stagedMouth} starting={stagedTadpole.attributes[4].value} onChange={(e) => setStagedMouth(e.target.value)} options={mouths} url="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/4" />
           </div>
           <div className="p-3 basis-1/2 md:basis-1/3">
-            <AttributeSelect name="Head" dragonflyName="Wonka" dragonflyBal={dragonflyWonka} value={stagedHead} starting={stagedTadpole.attributes[1].value} onChange={(e) => setStagedHead(e.target.value)} options={heads} />
+            <AttributeSelect name="Head" dragonflyName="Wonka" dragonflyBal={dragonflyWonka} value={stagedHead} starting={stagedTadpole.attributes[1].value} onChange={(e) => setStagedHead(e.target.value)} options={heads} url="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/5" />
           </div>
           <div className="p-3 basis-1/2 md:basis-1/3">
-            <AttributeSelect name="Outfit" dragonflyName="Yellow" dragonflyBal={dragonflyYellow} value={stagedOutfit} starting={stagedTadpole.attributes[5].value} onChange={(e) => setStagedOutfit(e.target.value)} options={outfits} />
+            <AttributeSelect name="Outfit" dragonflyName="Yellow" dragonflyBal={dragonflyYellow} value={stagedOutfit} starting={stagedTadpole.attributes[5].value} onChange={(e) => setStagedOutfit(e.target.value)} options={outfits} url="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/6" />
           </div>
           <div className="p-3 basis-full">
             <label>
               <div className="flex mb-1 content-center">
                 <div className="font-bold grow">Name & Description</div>
-                <p><img src={`/waterLily.png`} alt="Water lily" className="inline-block w-8 h-8" /> ({waterLily}/1)</p>
+                <p><a href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/1" target="blank"><img src={`/waterLily.png`} alt="Water lily" className="inline-block w-8 h-8" /></a> (<span className={waterLily === "0" ? "text-red-600" : null}>{waterLily}</span>/1)</p>
               </div>
               <input className="w-full mb-1" id="nameField" name="tadpoleName" type="text" value={stagedName} onChange={(e) => setStagedName(e.target.value)} />
               <textarea className="w-full" id="descField" name="tadpoleDesc" value={stagedDesc} onChange={(e) => setStagedDesc(e.target.value)} />
@@ -485,19 +501,19 @@ export default function Customize() {
           </div>
           <div className="p-3 basis-full text-center">
             {hasMissingDragonflies() && <p>To complete this customization, you&rsquo;ll need:</p>}
-            {didBackgroundChange() && dragonflyApple < 1 && <p>1 Dragonfly apple <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/11" target="_blank">purchase ↗</a></p>}
-            {didSkinChange() && dragonflyGum < 1 && <p>1 Dragonfly gum <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/2" target="_blank">purchase ↗</a></p>}
-            {didEyesChange() && dragonflyLime < 1 && <p>1 Dragonfly lime <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/3" target="_blank">purchase ↗</a></p>}
-            {didMouthChange() && dragonflyTurquoise < 1 && <p>1 Dragonfly turquoise <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/4" target="_blank">purchase ↗</a></p>}
-            {didHeadChange() && dragonflyWonka < 1 && <p>1 Dragonfly wonka <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/5" target="_blank">purchase ↗</a></p>}
-            {didOutfitChange() && dragonflyYellow < 1 && <p>1 Dragonfly yellow <a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/6" target="_blank">purchase ↗</a></p>}
-            {(didNameChange() || didDescChange()) && waterLily < 1 && <p>1 Water lily<a className="cursor-pointer underline underline-offset-2" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/1" target="_blank">purchase ↗</a></p> }
-            {hasMissingDragonflies() && <a className="cursor-pointer underline underline-offset-2" onClick={() => loadFlytrap(account)}>&#x21bb; Check my balance again</a>}
+            {didBackgroundChange() && dragonflyApple < 1 && <p>1 Dragonfly apple <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/11" target="_blank">purchase ↗</a></p>}
+            {didSkinChange() && dragonflyGum < 1 && <p>1 Dragonfly gum <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/2" target="_blank">purchase ↗</a></p>}
+            {didEyesChange() && dragonflyLime < 1 && <p>1 Dragonfly lime <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/3" target="_blank">purchase ↗</a></p>}
+            {didMouthChange() && dragonflyTurquoise < 1 && <p>1 Dragonfly turquoise <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/4" target="_blank">purchase ↗</a></p>}
+            {didHeadChange() && dragonflyWonka < 1 && <p>1 Dragonfly wonka <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/5" target="_blank">purchase ↗</a></p>}
+            {didOutfitChange() && dragonflyYellow < 1 && <p>1 Dragonfly yellow <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/6" target="_blank">purchase ↗</a></p>}
+            {(didNameChange() || didDescChange()) && waterLily < 1 && <p>1 Water lily<a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" href="https://opensea.io/assets/matic/0x944de29a2ea9bebdb26b8a387afbf95a364a37cc/1" target="_blank">purchase ↗</a></p> }
+            {hasMissingDragonflies() && <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4" onClick={() => loadFlytrap(account)}>&#x21bb; Check my balance again</a>}
             {hasChanges() && !hasMissingDragonflies() &&
               <>
                 <div>
-                  <Button onClick={() => handleCustomize()}>Customize!</Button>
-                  <a className="cursor-pointer underline underline-offset-2 ml-3" onClick={() => handleReset()}>Reset</a>
+                  {customizing ? <span>Customizing...</span> : <Button onClick={() => handleCustomize()}>Customize!</Button>}
+                  <a className="cursor-pointer underline underline-offset-2 hover:underline-offset-4 ml-3" onClick={() => handleReset()}>Reset</a>
                   <div className="text-sm italic mt-4">This will not cost gas.</div>
                 </div>
               </>
@@ -505,6 +521,7 @@ export default function Customize() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

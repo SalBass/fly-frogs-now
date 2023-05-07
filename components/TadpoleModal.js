@@ -1,8 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from './Button';
 
 export default function TadpoleModal(props) {
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  
+  function handleLoadMore(e) {
+    const { scrollTop, clientHeight, scrollHeight } = e.target;
+    if (scrollTop + clientHeight === scrollHeight) {
+      // user has scrolled to the bottom of the element
+      loadMore();
+    }
+  }
+  
+  function loadMore() {
+    if (loading) return;
+    setLoading(true);
+    
+    // get more tadpole NFTs
+    props.loadMoreTadpoles(props.account).then((data) => {setLoading(false)});
+  }
   
   function handleClick(tadpole) {
     props.onClick(tadpole);
@@ -18,7 +35,7 @@ export default function TadpoleModal(props) {
           </Button>
         </div>
       ) : (<div className="p-1 text-center border-t-2 border-black">
-        <a className="text-sm cursor-pointer underline underline-offset-2" onClick={() => setShowModal(true)}>
+        <a className="text-sm cursor-pointer underline underline-offset-2 hover:underline-offset-4" onClick={() => setShowModal(true)}>
           Switch tadpoles
         </a>
       </div>)}
@@ -41,6 +58,11 @@ export default function TadpoleModal(props) {
                     )
                   }
                 </div>
+                {props.pageKey && (loading ?
+                  <div className="text-center">Loading...</div>
+                  : <a className="text-center block cursor-pointer underline underline-offset-2 hover:underline-offset-4" onClick={handleLoadMore}>Load More Tapdoles</a>
+                  )
+                }
               </div>
             </div>
           </div>
