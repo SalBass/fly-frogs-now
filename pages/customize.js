@@ -143,10 +143,6 @@ export default function Customize() {
     setStagedOutfit(tadpole.attributes[5].value);
     setStagedName(tadpole.name);
     setStagedDesc(tadpole.desc);
-    if(document.getElementById("nameField") && document.getElementById("descField")) {
-      document.getElementById("nameField").value = tadpole.name;
-      document.getElementById("descField").value = tadpole.desc;
-    }
   }
   
   const handleReset = () => {
@@ -157,9 +153,7 @@ export default function Customize() {
     setStagedMouth(stagedTadpole.attributes[4].value);
     setStagedOutfit(stagedTadpole.attributes[5].value);
     setStagedName(stagedTadpole.name);
-    document.getElementById("nameField").value = stagedTadpole.name;
     setStagedDesc(stagedTadpole.desc);
-    document.getElementById("descField").value = stagedTadpole.desc;
   }
   
   function didBackgroundChange() {
@@ -432,7 +426,7 @@ export default function Customize() {
             <p className="text-lg">{stagedName}</p>
             <a className="cursor-point underline underline-offset-2" target="_blank" href={`https://opensea.io/assets/ethereum/0x9d3031d181ec6a2a784ba152f993332442fe8bfc/${stagedTadpole.tokenId}`}>Don&rsquo;t forget to refresh the metadata ↗</a>
             <div className="mt-8">
-              <Button href="/customize">&#8634; Start again</Button>
+              <Button href="/customize">&#x21bb; Start again</Button>
             </div>
           </div>
         </div>
@@ -485,8 +479,8 @@ export default function Customize() {
                 <div className="font-bold grow">Name & Description</div>
                 <p><img src={`/waterLily.png`} alt="Water lily" className="inline-block w-8 h-8" /> ({waterLily}/1)</p>
               </div>
-              <input className="w-full mb-1" id="nameField" name="tadpoleName" type="text" defaultValue={stagedTadpole.name} value={stagedTadpole.name} onChange={(e) => setStagedName(e.target.value)} />
-              <textarea className="w-full" id="descField" name="tadpoleDesc" defaultValue={stagedTadpole.desc} value={stagedTadpole.desc} onChange={(e) => setStagedDesc(e.target.value)} />
+              <input className="w-full mb-1" id="nameField" name="tadpoleName" type="text" value={stagedName} onChange={(e) => setStagedName(e.target.value)} />
+              <textarea className="w-full" id="descField" name="tadpoleDesc" value={stagedDesc} onChange={(e) => setStagedDesc(e.target.value)} />
             </label>
           </div>
           <div className="p-3 basis-full text-center">

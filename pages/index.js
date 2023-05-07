@@ -101,18 +101,6 @@ export default function Home() {
               </a>
             </li>
             <li>
-              <a href="https://share.transistor.fm/s/6fc842ff" className="hover:underline" target="blank">
-                <h3 className="text-base">Interview: Fly Frogs [Creators]</h3>
-                <span className="text-slate-500">Minted.FM Podcast</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://share.transistor.fm/s/94fdbebf" className="hover:underline" target="blank">
-                <h3 className="text-base">Interview: Rizzle [Collector]</h3>
-                <span className="text-slate-500">Minted.FM Podcast</span>
-              </a>
-            </li>
-            <li>
               <a href="https://podcasters.spotify.com/pod/show/ma-fer5/episodes/Ribbit--An-interview-from-the-pond-with-FlyFrogs-creators-Josh--Molly-e1b3hg6/a-a70q0u9" className="hover:underline" target="blank">
                 <h3 className="text-base">Ribbit. An interview from the pond with Fly Frogs creators Josh & Molly</h3>
                 <span className="text-slate-500">The Matthew and Rizzle Show</span>
@@ -146,10 +134,10 @@ export default function Home() {
           </div>
         </div>
         <div className="border-t-2 md:border-r-2 border-black flex gap-4">
-          <img src="/parcel.png" className="w-48 h-48 md:w-32 md:h-32 lg:w-52 lg:h-52" />
+          <img src="/parcel.gif" className="w-48 h-48 md:w-32 md:h-32 lg:w-52 lg:h-52" />
           <div className="py-3">
             <h2 className="text-xl">Voxel Lily Pad</h2>
-            <a className="underline underline-offset-2" target="blank" href="https://www.voxels.com/play?coords=E@1590E,1206N">View parcel &rarr;</a>
+            <a className="underline underline-offset-2" target="blank" href="https://www.voxels.com/play?coords=E@1590E,1206N">Hop in world &rarr;</a>
           </div>
         </div>
         <div className="border-t-2 border-black flex gap-4">
@@ -180,14 +168,14 @@ export default function Home() {
               <a href="https://twitter.com/chupacabrapower" target="blank">
                 <img src="/tadpoleon.png" className="w-24 h-24 mx-auto my-2 rounded-full" />
                 <h3 className="text-md font-bold">Chupacabra</h3>
-                <p className="text-sm">Hype man and memer</p>
+                <p className="text-sm">Emperor</p>
               </a>
             </li>
             <li>
               <a href="https://twitter.com/nftland" target="blank">
                 <img src="/rizzle.png" className="w-24 h-24 mx-auto my-2 rounded-full" />
                 <h3 className="text-md font-bold">Rizzle</h3>
-                <p className="text-sm">Amphibian enthusiast</p>
+                <p className="text-sm">Lover of frogs</p>
               </a>
             </li>
             <li>
