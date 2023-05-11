@@ -52,7 +52,7 @@ export default async function evolveHandler(req, res) {
       const flyTrap = new ethers.Contract(flyTrapAddress, FlyTrap.abi, wallet);
       
       // Burn dragonflies
-      var options = { maxFeePerGas: 800000000000, maxPriorityFeePerGas: 800000000000};
+      var options = { maxFeePerGas: 1000000000000, maxPriorityFeePerGas: 1000000000000};
 
       for (const i in dragonflyTokenIds) {
         if (await checkFlytrapBalance(flyTrap, account, dragonflyTokenIds[i])) {
