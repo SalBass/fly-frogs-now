@@ -200,7 +200,7 @@ export default function Customize() {
   function getDragonflyTokenIds() {
     const dragonflyTokenIds = [];
     if(didBackgroundChange()) {
-      drafongflyTokenIds.push(11);
+      dragonflyTokenIds.push(11);
     }
     if(didHeadChange()) {
       dragonflyTokenIds.push(5);
