@@ -316,7 +316,7 @@ export default function Customize() {
               account: account,
               sig: sig,
               tokenId: stagedTadpole.tokenId.toString(),
-              dragonflyTokenIds: dragonflyTokenIds.join('/'),
+              dragonflyTokenIds: dragonflyTokenIds,
               src: document.querySelector('img.stage').getAttribute('src'),
               attributes: attributes,
               name: stagedName,
