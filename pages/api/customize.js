@@ -52,11 +52,15 @@ export default async function evolveHandler(req, res) {
       const flyTrap = new ethers.Contract(flyTrapAddress, FlyTrap.abi, wallet);
       
       // Burn dragonflies
-      var options = { maxFeePerGas: 700000000000, maxPriorityFeePerGas: 700000000000};
+      var options = { maxFeePerGas: 1000000000000, maxPriorityFeePerGas: 1000000000000};
 
       for (const i in dragonflyTokenIds) {
         if (await checkFlytrapBalance(flyTrap, account, dragonflyTokenIds[i])) {
-          const transaction = await flyTrap.burnForAddress(account, dragonflyTokenIds[i], 1, options);
+          try {
+            const transaction = await flyTrap.burnForAddress(account, dragonflyTokenIds[i], 1, options);
+          } catch (e) {
+            res.status(500).json({ message: `Error depositing dragonflies and/or water lilies.` });
+          }
         } else {
           res.status(500).json({message: `Insufficient dragonflies.`});
         }
