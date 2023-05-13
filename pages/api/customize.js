@@ -13,6 +13,8 @@ import {
 } from '../../config';
 import { dataURItoBlob } from '../../util/images';
 
+const GAS_STATION = 'https://gasstation-mainnet.matic.network/v2';
+
 function checkSignature(sig, account, tokenId) {
   let inHash = ethers.utils.solidityKeccak256(
       ["address", "uint256"],
@@ -35,9 +37,27 @@ async function checkTadpoleOwner(account, tokenId) {
   return true;
 }
 
-async function checkFlytrapBalance(contract, account, id) {
-  const count = await contract.balanceOf(account, parseInt(id));
-  return count > 0;
+async function getTransactionPropertiesViaGasStation() {
+    const gasStationResponse = await fetch(GAS_STATION);
+    const gasStationObj = JSON.parse(await gasStationResponse.text());
+
+    let block_number = gasStationObj.blockNumber;
+    let base_fee = parseFloat(gasStationObj.estimatedBaseFee);
+    let max_priority_fee = gasStationObj.standard.maxPriorityFee;
+    let max_fee_per_gas = base_fee + max_priority_fee;
+
+    //  In case the network gets (up to 25%) more congested
+    max_fee_per_gas += (base_fee * 0.25);
+
+    //  cast gwei numbers to wei BigNumbers for ethers
+    const maxFeePerGas = ethers.utils.parseUnits(max_fee_per_gas.toFixed(9), 'gwei');
+    const maxPriorityFeePerGas = ethers.utils.parseUnits(max_priority_fee.toFixed(9), 'gwei');
+
+    //  Final object ready to feed into a transaction
+    return {
+        maxFeePerGas,
+        maxPriorityFeePerGas
+    };
 }
 
 export default async function evolveHandler(req, res) {
@@ -51,16 +71,10 @@ export default async function evolveHandler(req, res) {
       let wallet = new ethers.Wallet(privateKey, pProvider);
       const flyTrap = new ethers.Contract(flyTrapAddress, FlyTrap.abi, wallet);
       
-      // Burn dragonflies
-      var options = { maxFeePerGas: 1000000000000, maxPriorityFeePerGas: 1000000000000};
-
       for (const i in dragonflyTokenIds) {
-        if (await checkFlytrapBalance(flyTrap, account, dragonflyTokenIds[i])) {
-          const transaction = await flyTrap.burnForAddress(account, dragonflyTokenIds[i], 1, options);
-          transaction.wait();
-        } else {
-          res.status(500).json({message: `Insufficient dragonflies.`});
-        }
+        const options = await getTransactionPropertiesViaGasStation();
+        const transaction = await flyTrap.burnForAddress(account, dragonflyTokenIds[i], 1, options);
+        transaction.wait();
       }
       
       // Save image to ipfs
