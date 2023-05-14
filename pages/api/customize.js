@@ -46,8 +46,8 @@ async function getTransactionPropertiesViaGasStation() {
     let max_priority_fee = gasStationObj.fast.maxPriorityFee;
     let max_fee_per_gas = base_fee + max_priority_fee;
 
-    //  In case the network gets (up to 50%) more congested
-    max_fee_per_gas += (base_fee * 0.5);
+    //  In case the network gets (up to 25%) more congested
+    max_fee_per_gas += (base_fee * 0.25);
 
     //  cast gwei numbers to wei BigNumbers for ethers
     const maxFeePerGas = ethers.utils.parseUnits(max_fee_per_gas.toFixed(9), 'gwei');
@@ -71,12 +71,11 @@ export default async function evolveHandler(req, res) {
       let wallet = new ethers.Wallet(privateKey, pProvider);
       const flyTrap = new ethers.Contract(flyTrapAddress, FlyTrap.abi, wallet);
       
-      const options = await getTransactionPropertiesViaGasStation();
       for (const i in dragonflyTokenIds) {
+        const options = await getTransactionPropertiesViaGasStation();
         const transaction = await flyTrap.burnForAddress(account, dragonflyTokenIds[i], 1, options);
-        transaction.wait();
       }
-      
+
       // Save image to ipfs
       const NFT_STORAGE_TOKEN = process.env.NFT_STORAGE_API_KEY;
       const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
