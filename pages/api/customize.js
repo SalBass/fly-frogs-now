@@ -46,8 +46,8 @@ async function getTransactionPropertiesViaGasStation() {
     let max_priority_fee = gasStationObj.fast.maxPriorityFee;
     let max_fee_per_gas = base_fee + max_priority_fee;
 
-    //  In case the network gets (up to 25%) more congested
-    max_fee_per_gas += (base_fee * 0.25);
+    //  In case the network gets (up to 50%) more congested
+    max_fee_per_gas += (base_fee * 0.5);
 
     //  cast gwei numbers to wei BigNumbers for ethers
     const maxFeePerGas = ethers.utils.parseUnits(max_fee_per_gas.toFixed(9), 'gwei');
