@@ -43,7 +43,7 @@ async function getTransactionPropertiesViaGasStation() {
 
     let block_number = gasStationObj.blockNumber;
     let base_fee = parseFloat(gasStationObj.estimatedBaseFee);
-    let max_priority_fee = gasStationObj.standard.maxPriorityFee;
+    let max_priority_fee = gasStationObj.fast.maxPriorityFee;
     let max_fee_per_gas = base_fee + max_priority_fee;
 
     //  In case the network gets (up to 25%) more congested
@@ -71,8 +71,8 @@ export default async function evolveHandler(req, res) {
       let wallet = new ethers.Wallet(privateKey, pProvider);
       const flyTrap = new ethers.Contract(flyTrapAddress, FlyTrap.abi, wallet);
       
+      const options = await getTransactionPropertiesViaGasStation();
       for (const i in dragonflyTokenIds) {
-        const options = await getTransactionPropertiesViaGasStation();
         const transaction = await flyTrap.burnForAddress(account, dragonflyTokenIds[i], 1, options);
         transaction.wait();
       }
