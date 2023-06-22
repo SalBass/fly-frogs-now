@@ -7,13 +7,13 @@ import FlyTrap from '../../abi/FlyTrap.json';
 import {
   tadpolesAddress,
   flyTrapAddress,
+  ALCHEMY_KEY,
   ETH_NETWORK,
-  INFURA_ID,
   POLY_NETWORK
 } from '../../config';
 import { dataURItoBlob } from '../../util/images';
 
-const GAS_STATION = 'https://gasstation-mainnet.matic.network/v2';
+const GAS_STATION = 'https://gasstation.polygon.technology/v2';
 
 function checkSignature(sig, account, tokenId) {
   let inHash = ethers.utils.solidityKeccak256(
@@ -26,7 +26,7 @@ function checkSignature(sig, account, tokenId) {
 }
 
 async function checkTadpoleOwner(account, tokenId) {
-  const eProvider = new ethers.providers.InfuraProvider(ETH_NETWORK, INFURA_ID);
+  const eProvider = new ethers.providers.AlchemyProvider(ETH_NETWORK, ALCHEMY_KEY);
   const flyFrogsTadpoles = new ethers.Contract(tadpolesAddress, FlyFrogsTadpoles.abi, eProvider);
   
   let count = await flyFrogsTadpoles.balanceOf(account, tokenId);
@@ -43,7 +43,7 @@ async function getTransactionPropertiesViaGasStation() {
 
     let block_number = gasStationObj.blockNumber;
     let base_fee = parseFloat(gasStationObj.estimatedBaseFee);
-    let max_priority_fee = gasStationObj.fast.maxPriorityFee;
+    let max_priority_fee = parseFloat(gasStationObj.fast.maxPriorityFee);
     let max_fee_per_gas = base_fee + max_priority_fee;
 
     //  In case the network gets (up to 25%) more congested
@@ -66,7 +66,7 @@ export default async function evolveHandler(req, res) {
   if (checkSignature(sig, account, tokenId)) {
     if(await checkTadpoleOwner(account, tokenId)) {
       // Create a wallet & get FlyTrap contract
-      const pProvider = new ethers.providers.InfuraProvider(POLY_NETWORK, INFURA_ID);
+      const pProvider = new ethers.providers.AlchemyProvider(POLY_NETWORK, ALCHEMY_KEY);
       const privateKey = `0x${process.env.ACCOUNT_KEY}`;
       let wallet = new ethers.Wallet(privateKey, pProvider);
       const flyTrap = new ethers.Contract(flyTrapAddress, FlyTrap.abi, wallet);

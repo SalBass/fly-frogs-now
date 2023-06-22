@@ -5,4 +5,5 @@ export const tadpolesAddress = "0x9D3031D181EC6a2A784ba152F993332442FE8BFc"
 
 export const ETH_NETWORK = 'homestead'
 export const INFURA_ID = '19a03cebb819444fb0003c3004433a42'
+export const ALCHEMY_KEY = "kf_MSd0_EFwjv5qqsWIduwj_mtRKz78F"
 export const POLY_NETWORK = 'matic'

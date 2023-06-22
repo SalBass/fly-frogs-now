@@ -7,6 +7,7 @@ import Web3Modal from "web3modal";
 import {
   flyTrapAddress,
   tadpolesAddress,
+  ALCHEMY_KEY,
   INFURA_ID,
   POLY_NETWORK
 } from '../config';
@@ -20,7 +21,7 @@ import { backgrounds, heads, skins, eyes, mouths, outfits } from '../util/custom
 import { getImageUrl } from "../util/imageUrl";
 
 export default function Customize() {
-  const pProvider = new ethers.providers.InfuraProvider(POLY_NETWORK, INFURA_ID);
+  const pProvider = new ethers.providers.AlchemyProvider(POLY_NETWORK, ALCHEMY_KEY);
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
@@ -99,7 +100,7 @@ export default function Customize() {
   
   async function loadTadpoles(address) {
     const settings = {
-      apiKey: "kf_MSd0_EFwjv5qqsWIduwj_mtRKz78F",
+      apiKey: ALCHEMY_KEY,
       network: Network.ETH_MAINNET,
     };
     const alchemy = new Alchemy(settings);
