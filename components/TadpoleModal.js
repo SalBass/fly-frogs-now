@@ -47,6 +47,12 @@ export default function TadpoleModal(props) {
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border border-black relative bg-white p-2">
+                {/*header*/}
+                <div className="flex flex-row-reverse pr-2">
+                  <a className="text-3xl cursor-pointer" onClick={() => setShowModal(false)}>
+                    &times;
+                  </a>
+                </div>
                 {/*body*/}
                 <div className="flex flex-wrap gap-2">
                   {
