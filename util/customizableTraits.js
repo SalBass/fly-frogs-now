@@ -36,6 +36,7 @@ export const backgrounds = [
   "Valentines purple",
   "Valentines turquoise",
   "Verified",
+  "Wip",
   "Wonka",
   "Yellow"
 ];
@@ -129,6 +130,7 @@ export const eyes = [
   "Scribble",
   "Squint",
   "Verified",
+  "Wip",
   "Worried",
   "Zombie"
 ];
@@ -146,6 +148,7 @@ export const mouths = [
   "Overbite",
   "Party blue",
   "Plain",
+  "Samuel l",
   "Slime",
   "Smile",
   "Tongue",
