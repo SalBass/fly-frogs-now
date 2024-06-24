@@ -20,7 +20,7 @@ export default function Home() {
       <Header />
       <div className="md:flex flex-row-reverse bg-[#1F56B5]">
         <div className="border-t-2 border-black">
-          <video autoPlay muted loop className="bottom-0 right-0 min-w-full min-h-full">
+          <video playsInline autoPlay muted loop className="bottom-0 right-0 min-w-full min-h-full">
             <source src="/sizzle.mp4" type="video/mp4" />
           </video>
         </div>
