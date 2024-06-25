@@ -34,7 +34,7 @@ export default function Home() {
             <li><a className="underline underline-offset-2 hover:underline-offset-4" href="https://www.patreon.com/flyfrog">Patreon</a></li>
             <li><a className="underline underline-offset-2 hover:underline-offset-4" href="https://cults3d.com/en/users/flyfrog/3d-models">Cults</a></li>
             <li><a className="underline underline-offset-2 hover:underline-offset-4" href="https://thangs.com/designer/flyfrog">Thangs</a></li>
-            <li><a className="underline underline-offset-2 hover:underline-offset-4" href="https://www.myminifactory.com/users/flyfrog">MyMiniFactory</a></li>
+            <li><a className="underline underline-offset-2 hover:underline-offset-4" href="https://www.printables.com/@flyfrog_1864829">Printables</a></li>
           </ul>
         </div>
       </div>
