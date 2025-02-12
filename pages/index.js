@@ -38,6 +38,17 @@ export default function Home() {
           </ul>
         </div>
       </div>
+      <div className="md:flex">
+        <div className="border-t-2 border-black md:border-r-2">
+          <img src="TGIFrogday.gif" className="md:max-h-80" />
+        </div>
+        <div className="border-t-2 border-black md:border-r-2">
+          <img src="SantaFrog.jpg" className="md:max-h-80" />
+        </div>
+        <div className="border-t-2 border-black">
+          <img src="Batfrog.gif" className="md:max-h-80" />
+        </div>
+      </div>
       <div className="text-center bg-black">
           <a href="https://instagram.com/flyfrog3d" target="blank">
             <Icon icon="simple-icons:instagram" color="white" height="30px" className='m-4 inline-block' />
